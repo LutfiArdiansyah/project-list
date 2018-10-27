@@ -1,0 +1,90 @@
+<clr-main-container>
+  <clr-header>
+    <div class="branding">
+      <a class="nav-link">
+        <clr-icon shape="list" size="24"></clr-icon>
+        <span class="title">Enterprise Solution Management System</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger>
+          {{loginAs | titlecase }}
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <!-- <button class="nav-icon" clrDropdownTrigger>
+          <clr-icon shape="user"></clr-icon>
+          <clr-icon shape="caret down"></clr-icon>
+        </button> -->
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a (click)="logout()" clrDropdownItem>Log out</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-header>
+  <div class="content-container">
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+    <clr-vertical-nav [clrVerticalNavCollapsible]="true" [(clrVerticalNavCollapsed)]="collapsed" *ngIf="!f_mobile">
+      <clr-vertical-nav-group routerLinkActive="active">
+        <clr-icon shape="data-cluster" class="is-solid" clrVerticalNavIcon></clr-icon>
+        Master
+        <clr-vertical-nav-group-children>
+          <a clrVerticalNavLink routerLink="mst_project" routerLinkActive="active">
+            Project
+          </a>
+          <a clrVerticalNavLink routerLink="mst_priority_project" routerLinkActive="active">
+            Priority Project
+          </a>
+          <a clrVerticalNavLink routerLink="mst_status_project" routerLinkActive="active">
+            Status Project
+          </a>
+          <a clrVerticalNavLink routerLink="mst_tipe_project" routerLinkActive="active">
+            Tipe Project
+          </a>
+          <a clrVerticalNavLink routerLink="user" routerLinkActive="active">
+            User
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+      <clr-vertical-nav-group routerLinkActive="active">
+        <clr-icon shape="tasks" clrVerticalNavIcon></clr-icon>
+        Project
+        <clr-vertical-nav-group-children>
+          <a clrVerticalNavLink routerLink="chart" routerLinkActive="active">
+            Dashboard
+          </a>
+          <a clrVerticalNavLink routerLink="project_list" routerLinkActive="active">
+            Project List
+          </a>
+          <a clrVerticalNavLink routerLink="task_list" routerLinkActive="active">
+            Task List
+          </a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+    </clr-vertical-nav>
+    <nav class="sidenav" [clr-nav-level]="1" *ngIf="f_mobile">
+      <section class="nav-group collapsible">
+        <input id="project" type="checkbox">
+        <label for="project">Master</label>
+        <ul class="nav-list">
+          <li><a class="nav-link" routerLink="mst_project">Project</a></li>
+          <li><a class="nav-link" routerLink="mst_priority_project">Priority Project</a></li>
+          <li><a class="nav-link" routerLink="mst_status_project">Status Project</a></li>
+          <li><a class="nav-link" routerLink="mst_tipe_project">Tipe Project</a></li>
+          <li><a class="nav-link" routerLink="user">User</a></li>
+        </ul>
+      </section>
+      <section class="nav-group collapsible">
+        <input id="project2" type="checkbox">
+        <label for="project2">Project</label>
+        <ul class="nav-list">
+          <li><a class="nav-link" routerLink="chart">Dashboard</a></li>
+          <li><a class="nav-link" routerLink="project_list">Project List</a></li>
+          <li><a class="nav-link" routerLink="task_list">Task List</a></li>
+        </ul>
+      </section>
+    </nav>
+  </div>
+</clr-main-container>

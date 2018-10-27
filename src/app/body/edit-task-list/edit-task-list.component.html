@@ -1,0 +1,133 @@
+<!-- <div class="progress loop" *ngIf="this.loading"><progress></progress></div> -->
+<span class="spinner spinner-lg" *ngIf="this.loading">
+  Loading...
+</span>
+<div *ngIf="!this.loading">
+  <h3>Edit - {{project.project_name}}</h3>
+  <hr>
+  <form class="clr-form clr-form-compact">
+
+    <div class="form-group">
+      <label>Ticket</label>
+      <input type="text" placeholder="No. Ticket" class="clr-input" name="ticket" [(ngModel)]="project.ticket" size="20">
+    </div>
+
+    <div class="form-group">
+      <label>Project Name</label>
+      <select clrInput id="project_name" [(ngModel)]="project.project_name" name="project_name">
+        <option *ngFor="let app of projects" value="{{app.nama_aplikasi}}">- {{app.nama_aplikasi}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <div class="alert alert-danger" *ngIf="f_project_name">
+        <span class="alert-text"> Project Name tidak boleh kosong.</span>
+      </div>
+    </div>  
+
+    <div class="form-group">
+      <label>Tipe Project</label>
+      <select clrInput id="tipe_project" [(ngModel)]="project.tipe_project" name="tipe_project">
+        <option *ngFor="let tipe_project of tipe_projects" value="{{tipe_project.tipe_project_name}}">-
+          {{tipe_project.tipe_project_name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <div class="alert alert-danger" *ngIf="f_tipe_project">
+        <span class="alert-text"> Tipe Project tidak boleh kosong.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Status Project</label>
+      <select clrInput id="status" [(ngModel)]="project.status" name="status">
+        <option *ngFor="let status_project of status_projects" value="{{status_project.status_name}}">-
+          {{status_project.status_name}}</option>
+      </select>
+      <div class="alert alert-danger" *ngIf="f_status_project">
+        <span class="alert-text"> Status Project tidak boleh kosong.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="descriptions">Descriptions</label>
+      <textarea id="descriptions" rows="5" name="descriptions" [(ngModel)]="project.descriptions"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="deadline">Deadline</label>
+      <input type="text" clrDate placeholder="Deadline" class="clr-input" id="deadline" name="deadline" [(ngModel)]="project.deadline"
+        size="20" disabled>
+    </div>
+
+    <div class="form-group">
+      <label>PIC Dev</label>
+      <div class="alert alert-danger" *ngIf="f_pic_dev">
+        <span class="alert-text">PIC Dev tidak boleh kosong.</span>
+      </div>
+      <div class="checkbox" *ngFor="let pic of pic_dev">
+        <input type="checkbox" id="{{pic.name}}" [checked]="pic.checked" (change)="pic.checked = !pic.checked">
+        <label for="{{pic.name}}">{{pic.name}}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>PIC BA</label>
+      <div class="checkbox" *ngFor="let pic of pic_ba">
+        <input type="checkbox" id="{{pic.name}}" [checked]="pic.checked" (change)="pic.checked = !pic.checked">
+        <label for="{{pic.name}}">{{pic.name}}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>PIC PMO</label>
+      <div class="checkbox" *ngFor="let pic of pic_pmo">
+        <input type="checkbox" id="{{pic.name}}" [checked]="pic.checked" (change)="pic.checked = !pic.checked">
+        <label for="{{pic.name}}">{{pic.name}}</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Priority Project</label>
+      <select clrInput id="priority" [(ngModel)]="project.priority" name="priority">
+        <option *ngFor="let priority_project of priority_projects" value="{{priority_project.priority_name}}">-
+          {{priority_project.priority_name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="start_dev">Start Dev</label>
+      <input type="text" clrDate placeholder="Start Dev" class="clr-input" name="start_dev" [(ngModel)]="project.start_dev"
+        size="20" disabled>
+    </div>
+
+    <div class="form-group">
+      <label for="end_dev">End Dev</label>
+      <input type="text" clrDate placeholder="End Dev" class="clr-input" name="end_dev" [(ngModel)]="project.end_dev"
+        size="20" disabled>
+    </div>
+  </form>
+  <div class="alert alert-success" *ngIf="f_update">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+        </div>
+        <span class="alert-text">Edit Berhasil.</span>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-danger" *ngIf="f_error">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+        </div>
+        <span class="alert-text">Èdit Gagal.</span>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary btn-block" (click)="editTaskList()" [disabled]="f_btn_disabled">Edit</button>
+  <button class="btn btn-default btn-block" (click)="back()" [disabled]="f_btn_disabled">Back</button>
+</div>

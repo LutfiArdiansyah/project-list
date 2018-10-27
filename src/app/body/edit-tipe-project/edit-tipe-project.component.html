@@ -1,0 +1,46 @@
+<span class="spinner spinner-lg" *ngIf="this.loading">
+  Loading...
+</span>
+<div *ngIf="!this.loading">
+  <h3>Edit Tipe Project</h3>
+  <hr>
+  <form class="clr-form clr-form-compact">
+    <div class="form-group">
+      <label>ID</label>
+      <input type="text" [(ngModel)]="status_projects.id" placeholder="ID" class="clr-input" name="ID" size="50"
+        disabled>
+    </div>
+    <div class="form-group">
+      <label>Tipe Project Name</label>
+      <input type="text" [(ngModel)]="status_projects.tipe_project_name" placeholder="Name" class="clr-input" name="name"
+        size="50" maxlength="50">
+    </div>
+    <div class="form-group">
+      <div class="alert alert-danger" *ngIf="f_status_name">
+        <span class="alert-text">Tipe Project Name tidak boleh kosong.</span>
+      </div>
+    </div>
+  </form>
+  <div class="alert alert-success" *ngIf="f_update">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+        </div>
+        <span class="alert-text">Edit Berhasil.</span>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-danger" *ngIf="f_error">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+        </div>
+        <span class="alert-text">Èdit Gagal.</span>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary btn-block" (click)="edit()" [disabled]="f_btn_disabled">Edit</button>
+  <button class="btn btn-default btn-block" (click)="back()" [disabled]="f_btn_disabled">Back</button>
+</div>

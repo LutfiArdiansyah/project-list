@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+.spinner {
+    min-width: 3.5rem !important;
+    min-height: 3.5rem !important;
+    position: fixed !important;
+    left: 0;    right: 0;
+    top:  0;    bottom: 0;
+    margin: auto;
+}
+
+.mid {
+    text-align: center;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.datagrid .datagrid-column .datagrid-filter, .datagrid .datagrid-head .datagrid-row-actions .datagrid-filter{
+    background: rgba(115,115,115,.25) !important;
+    border: none !important;
+}

@@ -1,0 +1,165 @@
+<!-- <div class="progress loop" *ngIf="this.loading"><progress></progress></div> -->
+<span class="spinner spinner-lg" *ngIf="this.loading">
+  Loading...
+</span>
+<div *ngIf="!this.loading">
+  <h3>Task List</h3>
+  <hr>
+  <button *ngIf="!f_mobile" type="button" class="btn btn-icon btn-primary" style="justify-content: right; float: right" routerLink="../add_task">
+    <clr-icon shape="plus"></clr-icon> Tambah
+  </button>
+  <button type="button" class="btn btn-icon btn-success" style="justify-content: right; float: right" (click)="refresh()">
+    <clr-icon shape="refresh"></clr-icon>
+  </button>
+  <br>
+  <br>
+  <clr-datagrid>
+    <!-- <clr-dg-column>No.</clr-dg-column> -->
+    <!-- <clr-dg-column [clrDgField]="'ticket'" [clrDgSortOrder]="descSort">Ticket</clr-dg-column> -->
+    <clr-dg-column [clrDgField]="'project_name'" [clrDgSortOrder]="descSort">Project Name</clr-dg-column>
+    <clr-dg-column [clrDgField]="'tipe_project'" [clrDgSortOrder]="descSort" *ngIf="!f_mobile">Tipe Project</clr-dg-column>
+    <clr-dg-column [clrDgField]="'status'" [clrDgSortOrder]="descSort" *ngIf="!f_mobile">Status</clr-dg-column>
+    <clr-dg-column [clrDgField]="'descriptions'" [clrDgSortOrder]="descSort">Descriptions</clr-dg-column>
+    <!-- <clr-dg-column [clrDgField]="'deadline'" [clrDgSortOrder]="descSort">Deadline</clr-dg-column> -->
+    <clr-dg-column [clrDgField]="'pic_dev'" [clrDgSortOrder]="descSort" *ngIf="!f_mobile">PIC Dev</clr-dg-column>
+    <!-- <clr-dg-column [clrDgField]="'pic_ba'" [clrDgSortOrder]="descSort">PIC BA</clr-dg-column> -->
+    <!-- <clr-dg-column [clrDgField]="'pic_pmo'" [clrDgSortOrder]="descSort">PIC PMO</clr-dg-column> -->
+    <clr-dg-column [clrDgField]="'priority'" [clrDgSortOrder]="descSort" *ngIf="!f_mobile">Priority</clr-dg-column>
+    <!-- <clr-dg-column [clrDgField]="'start_dev'" [clrDgSortOrder]="descSort">Start Dev</clr-dg-column>
+  <clr-dg-column [clrDgField]="'end_dev'" [clrDgSortOrder]="descSort">End Dev</clr-dg-column> -->
+    <clr-dg-column>Actions</clr-dg-column>
+    <clr-dg-row *clrDgItems="let project of list_projects">
+      <!-- <clr-dg-cell></clr-dg-cell> -->
+      <!-- <clr-dg-cell>{{project.ticket}}</clr-dg-cell> -->
+      <clr-dg-cell>{{project.project_name}}</clr-dg-cell>
+      <clr-dg-cell *ngIf="!f_mobile">{{project.tipe_project}}</clr-dg-cell>
+      <clr-dg-cell *ngIf="!f_mobile">{{project.status}}</clr-dg-cell>
+      <clr-dg-cell>{{project.descriptions}}</clr-dg-cell>
+      <!-- <clr-dg-cell>{{project.deadline}}</clr-dg-cell> -->
+      <clr-dg-cell *ngIf="!f_mobile">{{project.pic_dev}}</clr-dg-cell>
+      <!-- <clr-dg-cell>{{project.pic_ba}}</clr-dg-cell> -->
+      <!-- <clr-dg-cell>{{project.pic_pmo}}</clr-dg-cell> -->
+      <clr-dg-cell class="mid" *ngIf="!f_mobile">{{project.priority}}</clr-dg-cell>
+      <!-- <clr-dg-cell>{{project.start_dev}}</clr-dg-cell>
+    <clr-dg-cell>{{project.end_dev}}</clr-dg-cell> -->
+      <clr-dg-cell class="mid">
+        <clr-icon class="cursor-pointer" shape="eye" (click)="showModal(project)"></clr-icon>
+        <clr-icon style="margin-left: 10px;" *ngIf="!f_mobile" class="cursor-pointer" shape="pencil" routerLink="../edit_task_list/{{project.id_project}}"></clr-icon>
+      </clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgPageSize]="10">
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+        of {{pagination.totalItems}} data
+      </clr-dg-pagination>
+    </clr-dg-footer>
+  </clr-datagrid>
+
+  <!-- <div *ngIf="f_mobile">
+    <div class="form-group">
+      <input style="width: 100% !important; margin-top: 15px !important;" type="text" placeholder="Search">
+    </div>
+    <div class="row" *ngFor="let project of list_projects">
+      <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="card-header">
+            {{project.project_name}}
+          </div>
+          <div class="card-block">
+            <div class="card-title">
+              {{project.descriptions}}
+            </div>
+            <div class="card-text">
+              {{project.pic_dev}}
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-sm btn-link" (click)="showModal(project)" style="visibility: hidden;">
+              <clr-icon shape="eye"></clr-icon>
+            </button>
+            <button class="btn btn-sm btn-link" (click)="showModal(project)" style="float: right;">
+              <clr-icon shape="eye"></clr-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+<div class="modal" [hidden]="!f_modal">
+  <div class="modal-dialog" role="dialog" aria-hidden="true" *ngIf="project">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-label="Close" class="close" type="button" (click)="hideModal()">
+          <clr-icon aria-hidden="true" shape="close"></clr-icon>
+        </button>
+        <h3 class="modal-title">{{project.project_name}}</h3>
+      </div>
+      <div class="modal-body">
+        <table>
+          <tr valign="top">
+            <td><label>Ticket</label></td>
+            <td>:</td>
+            <td><label>{{project.ticket}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>Tipe Project</label></td>
+            <td>:</td>
+            <td><label>{{project.tipe_project}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>Status Project</label></td>
+            <td>:</td>
+            <td><label>{{project.status}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>Description</label></td>
+            <td>:</td>
+            <td><label>{{project.descriptions}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>Deadline</label></td>
+            <td>:</td>
+            <td><label>{{project.deadline}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>PIC DEV</label></td>
+            <td>:</td>
+            <td><label>{{project.pic_dev}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>PIC BA</label></td>
+            <td>:</td>
+            <td><label>{{project.pic_ba}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>PIC PMO</label></td>
+            <td>:</td>
+            <td><label>{{project.pic_pmo}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>Priority Project</label></td>
+            <td>:</td>
+            <td><label>{{project.priority}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>Start Dev</label></td>
+            <td>:</td>
+            <td><label>{{project.start_dev}}</label></td>
+          </tr>
+          <tr valign="top">
+            <td><label>End Dev</label></td>
+            <td>:</td>
+            <td><label>{{project.end_dev}}</label></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="button" (click)="hideModal()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop" aria-hidden="true" [hidden]="!f_modal"></div>

@@ -1,0 +1,66 @@
+<span class="spinner spinner-lg" *ngIf="!this.chartDataMTC">
+  Loading...
+</span>
+<div *ngIf="this.chartDataMTC">
+  <h3>Dashboard</h3>
+  <hr>
+  <div style="margin-bottom: 50px;" *ngIf="!f_mobile">
+    <div style="width: 48%; display: inline-block; border:0.2em solid white; border-radius: 5px; margin-right: 10px;"
+      *ngIf="chartData">
+      <h4 style="text-align: center; margin-bottom: 10px;">Status Project</h4>
+      <canvas baseChart [chartType]="'pie'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+        [legend]="true">
+      </canvas>
+    </div>
+
+    <div style="width: 48%; display: inline-block; border:0.2em solid white; border-radius: 5px;" *ngIf="chartDataPRJ">
+      <h4 style="text-align: center; margin-bottom: 10px;">Project</h4>
+      <canvas baseChart [chartType]="'pie'" [datasets]="chartDataPRJ" [labels]="chartLabelsPRJ" [options]="chartOptions"
+        [legend]="true">
+      </canvas>
+    </div>
+  </div>
+  <div style="margin-bottom: 50px;" *ngIf="!f_mobile">
+    <div style="width: 48%; display: inline-block; border:0.2em solid white; border-radius: 5px; margin-right: 10px;"
+      *ngIf="chartDataMTC">
+      <h4 style="text-align: center; margin-bottom: 10px;">Maintenance</h4>
+      <canvas baseChart [chartType]="'pie'" [datasets]="chartDataMTC" [labels]="chartLabelsMTC" [options]="chartOptions"
+        [legend]="true">
+      </canvas>
+    </div>
+
+    <div style="width: 48%; display: inline-block; border:0.2em solid white; border-radius: 5px;" *ngIf="chartDataCR">
+      <h4 style="text-align: center; margin-bottom: 10px;">Change Request</h4>
+      <canvas baseChart [chartType]="'pie'" [datasets]="chartDataCR" [labels]="chartLabelsCR" [options]="chartOptions"
+        [legend]="true">
+      </canvas>
+    </div>
+  </div>
+
+  <div *ngIf="f_mobile">
+    <div style="width: 100%; border:0.2em solid white; border-radius: 5px; margin-bottom: 20px;" *ngIf="chartData">
+      <h6 style="text-align: center; margin-bottom: 10px;">Status Project</h6>
+      <canvas baseChart [chartType]="'pie'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+        [legend]="true">
+      </canvas>
+    </div>
+    <div style="width: 100%; border:0.2em solid white; border-radius: 5px; margin-bottom: 20px;" *ngIf="chartDataPRJ">
+      <h6 style="text-align: center; margin-bottom: 10px;">Project</h6>
+      <canvas baseChart [chartType]="'pie'" [datasets]="chartDataPRJ" [labels]="chartLabelsPRJ" [options]="chartOptions"
+        [legend]="true">
+      </canvas>
+    </div>
+    <div style="width: 100%; border:0.2em solid white; border-radius: 5px; margin-bottom: 20px;" *ngIf="chartDataMTC">
+      <h6 style="text-align: center; margin-bottom: 10px;">Maintenance</h6>
+      <canvas baseChart [chartType]="'pie'" [datasets]="chartDataMTC" [labels]="chartLabelsMTC" [options]="chartOptions"
+        [legend]="true">
+      </canvas>
+    </div>
+    <div style="width: 100%; border:0.2em solid white; border-radius: 5px; margin-bottom: 20px;" *ngIf="chartDataCR">
+      <h6 style="text-align: center; margin-bottom: 10px;">Change Request</h6>
+      <canvas baseChart [chartType]="'pie'" [datasets]="chartDataCR" [labels]="chartLabelsCR" [options]="chartOptions"
+        [legend]="true">
+      </canvas>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<!-- <div class="progress loop" *ngIf="this.loading"><progress></progress></div> -->
+<span class="spinner spinner-lg" *ngIf="this.loading">
+  Loading...
+</span>
+<div *ngIf="!this.loading">
+  <h3>Status Project</h3>
+  <hr>
+  <button type="button" class="btn btn-icon btn-primary" style="justify-content: right; float: right" routerLink="../add_status_project">
+    <clr-icon shape="plus"></clr-icon> Tambah
+  </button>
+  <button type="button" class="btn btn-icon btn-success" style="justify-content: right; float: right" (click)="refresh()">
+    <clr-icon shape="refresh"></clr-icon>
+  </button>
+  <br>
+  <br>
+  <clr-datagrid>
+    <!-- <clr-dg-column>No.</clr-dg-column> -->
+    <clr-dg-column [clrDgField]="'id'" [clrDgSortOrder]="descSort">ID</clr-dg-column>
+    <!-- <clr-dg-column [clrDgField]="'status_code'" [clrDgSortOrder]="descSort">Status Code</clr-dg-column> -->
+    <clr-dg-column [clrDgField]="'status_name'" [clrDgSortOrder]="descSort">Status Name</clr-dg-column>
+    <clr-dg-column>Actions</clr-dg-column>
+    <clr-dg-row *clrDgItems="let project of status_projects">
+      <!-- <clr-dg-cell></clr-dg-cell> -->
+      <clr-dg-cell>{{project.id}}</clr-dg-cell>
+      <!-- <clr-dg-cell>{{project.status_code}}</clr-dg-cell> -->
+      <clr-dg-cell>{{project.status_name}}</clr-dg-cell>
+      <clr-dg-cell class="mid">
+        <clr-icon class="cursor-pointer" shape="pencil" routerLink="../edit_status_project/{{project.id}}"></clr-icon>
+      </clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgPageSize]="10">
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+        of {{pagination.totalItems}} data
+      </clr-dg-pagination>
+    </clr-dg-footer>
+  </clr-datagrid>
+</div>

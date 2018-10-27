@@ -1,0 +1,47 @@
+<span class="spinner spinner-lg" *ngIf="this.loading">
+    Loading...
+  </span>
+  <div *ngIf="!this.loading">
+    <h3>Add Status Project</h3>
+    <hr>
+    <form class="clr-form clr-form-compact">
+      <div class="form-group">
+        <label>ID</label>
+        <input type="text" [(ngModel)]="status_projects.id" placeholder="ID" class="clr-input" name="ID" size="50"
+          disabled>
+      </div>
+      <div class="form-group">
+        <label>Status Project Name</label>
+        <input type="text" [(ngModel)]="status_projects.status_name" placeholder="Name" class="clr-input" name="name"
+          size="50" maxlength="50">
+      </div>
+      <div class="form-group">
+        <div class="alert alert-danger" *ngIf="f_status_name">
+          <span class="alert-text">Status Project Name tidak boleh kosong.</span>
+        </div>
+      </div>
+    </form>
+    <div class="alert alert-success" *ngIf="f_submit">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+          </div>
+          <span class="alert-text">Data Berhasil Disimpan.</span>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-danger" *ngIf="f_error">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+          </div>
+          <span class="alert-text">Data Gagal Disimpan.</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-block" (click)="submit()" [disabled]="f_btn_disabled">Submit</button>
+    <button class="btn btn-default btn-block" (click)="back()" [disabled]="f_btn_disabled">Back</button>
+  </div>
+  

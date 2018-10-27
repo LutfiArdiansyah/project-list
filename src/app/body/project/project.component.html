@@ -1,0 +1,37 @@
+<!-- <div class="progress loop" *ngIf="this.loading"><progress></progress></div> -->
+<span class="spinner spinner-lg" *ngIf="this.loading">
+  Loading...
+</span>
+<div *ngIf="!this.loading">
+  <h3>Project</h3>
+  <hr>
+  <button type="button" class="btn btn-icon btn-primary" style="justify-content: right; float: right" routerLink="../add_project_name">
+    <clr-icon shape="plus"></clr-icon> Tambah
+  </button>
+  <button type="button" class="btn btn-icon btn-success" style="justify-content: right; float: right" (click)="refresh()">
+    <clr-icon shape="refresh"></clr-icon>
+  </button>
+  <br>
+  <br>
+  <clr-datagrid>
+    <!-- <clr-dg-column>No.</clr-dg-column> -->
+    <clr-dg-column [clrDgField]="'id_aplikasi'" [clrDgSortOrder]="descSort">ID Aplikasi</clr-dg-column>
+    <clr-dg-column [clrDgField]="'nama_aplikasi'" [clrDgSortOrder]="descSort">Nama Aplikasi</clr-dg-column>
+    <clr-dg-column>Actions</clr-dg-column>
+    <clr-dg-row *clrDgItems="let project of projects">
+      <!-- <clr-dg-cell></clr-dg-cell> -->
+      <clr-dg-cell>{{project.id_aplikasi}}</clr-dg-cell>
+      <clr-dg-cell>{{project.nama_aplikasi}}</clr-dg-cell>
+      <clr-dg-cell class="mid">
+        <clr-icon class="cursor-pointer" shape="pencil" routerLink="../edit_project_name/{{project.id_aplikasi}}"></clr-icon>
+      </clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgPageSize]="10">
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+        of {{pagination.totalItems}} data
+      </clr-dg-pagination>
+    </clr-dg-footer>
+  </clr-datagrid>
+</div>

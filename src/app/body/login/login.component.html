@@ -1,0 +1,30 @@
+<div class="login-wrapper">
+  <!-- <form class="login"> -->
+  <div class="login">
+    <section class="title">
+      <h3 class="welcome">Welcome to</h3>
+      Enterprise Solution Management System
+      <h5 class="hint">Use your MUF ID to sign in</h5>
+    </section>
+    <div class="login-group">
+      <input class="username" [(ngModel)]="loginUser.username" type="number" maxlength="8" minlength="8" min="0"
+        placeholder="NIK">
+      <input class="password" [(ngModel)]="loginUser.password" type="password" placeholder="Password">
+      <!-- <div class="checkbox">
+        <input type="checkbox" id="rememberme">
+        <label for="rememberme">
+          Remember me
+        </label>
+      </div> -->
+      <div class="error active" *ngIf="f_fail_login">
+        Invalid username or password
+      </div>
+      <div class="error active" *ngIf="f_empty_login">
+        Username or password cannot empty.
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+      <a target="_blank" href="http://ssad.muf.co.id/pwm/private/login" class="signup">Forgot Password.</a>
+    </div>
+  </div>
+  <!-- </form> -->
+</div>
